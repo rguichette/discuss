@@ -1,4 +1,3 @@
-'use server'
 export {signIn} from './signIn'
 export {signOut} from './singOut'
 export {createComment} from './createComment'
