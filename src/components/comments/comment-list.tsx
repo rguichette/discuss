@@ -1,11 +1,21 @@
 import type { Comment, User } from "@prisma/client";
 import CommentShow from "@/components/comments/comment-show";
+import {
+  CommentWithAuthor,
+  fetchCommentsByPostId,
+} from "@/db/queries/comments";
+
+// interface CommentListProps {
+//   comments: (Comment & { user: Partial<User> })[];
+// }
 
 interface CommentListProps {
-  comments: (Comment & { user: Partial<User> })[];
+  fetchData: () => Promise<CommentWithAuthor[]>;
 }
 
-export default function CommentList({ comments }: CommentListProps) {
+export default async function CommentList({ fetchData }: CommentListProps) {
+  const comments = await fetchData();
+
   const topLevelComments = comments.filter(
     (comment) => comment.parentId === null
   );
