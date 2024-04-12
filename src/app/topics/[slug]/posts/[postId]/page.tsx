@@ -22,7 +22,7 @@ export default function PostShowPage({ params }: PostShowPageProps) {
 
       <PostShow postId={postId} />
       <CommentCreateForm postId={postId} />
-      <CommentList fetchData={() => fetchCommentsByPostId(postId)} />
+      <CommentList postId={postId} />
     </div>
   );
 }
