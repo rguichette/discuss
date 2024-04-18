@@ -4,6 +4,8 @@ import PostShow from "@/components/posts/post-show";
 import paths from "@/paths";
 import Link from "next/link";
 import { fetchCommentsByPostId } from "@/db/queries/comments";
+import { Suspense } from "react";
+import PostShowLoading from "../post-show-loading";
 
 interface PostShowPageProps {
   params: {
@@ -20,7 +22,9 @@ export default function PostShowPage({ params }: PostShowPageProps) {
         {"< "} Back to {slug}
       </Link>
 
-      <PostShow postId={postId} />
+      <Suspense fallback={<PostShowLoading />}>
+        <PostShow postId={postId} />
+      </Suspense>
       <CommentCreateForm postId={postId} />
       <CommentList postId={postId} />
     </div>
